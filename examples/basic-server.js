@@ -1,10 +1,10 @@
-var MCPEServer = require('../index');
+var MCPEServer = require('../lib/Server);
 
 var Packet = require('../lib/net/Packet');
 
 var Protocol = require('../lib/net/Protocol');
 
-var server = new MCPEServer.Server();
+var server = new MCPEServer();
 
 server.on('listen', function () {
   console.log('Listening on ' + server.localAddress + ':' + server.localPort);
