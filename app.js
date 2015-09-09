@@ -18,7 +18,7 @@ server.addPacketHandler(Protocol.CONNECTED_PING, arbitraryPrecondition, function
     pingID: packet.fields.pingID,
     serverID: 0,
     magic: null,
-    identifier: 'MCPE;Test Server;2 7;0.11.1;0;20'
+    identifier: 'MCPE;A Minecraft PE Server;2 7;0.11.1;0;20'
   });
 
   server.sendMessageTo(reply, rinfo);
