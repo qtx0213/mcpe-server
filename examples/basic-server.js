@@ -1,10 +1,10 @@
-var MCPEServer = require('../lib/Server');
+var MCPEServer = require('../lib/Server').Server;
 
-var Packet = require('../lib/net/Packet');
+var Packet = require('../lib/net/Packet').Packet;
 
 var Protocol = require('../lib/net/Protocol').Protocol;
 
-var server = new MCPEServer.Server;
+var server = new MCPEServer;
 
 server.on('listen', function () {
   console.log('Listening on ' + server.localAddress + ':' + server.localPort);
@@ -16,7 +16,7 @@ function arbitraryPrecondition(packet, rinfo) {
 
 server.addPacketHandler(Protocol.CONNECTED_PING, arbitraryPrecondition, function (packet, rinfo, next) {
   
-  var reply = Packet['default'].create(Protocol['default'].UNCONNECTED_PONG, {
+  var reply = Packet.create(Protocol.UNCONNECTED_PONG, {
     pingID: packet.fields.pingID,
     serverID: 0,
     magic: null,
