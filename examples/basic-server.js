@@ -2,7 +2,7 @@ var MCPEServer = require('../lib/Server');
 
 var Packet = require('../lib/net/Packet');
 
-var Protocol = require('../lib/net/Protocol');
+var Protocol = require('../lib/net/Protocol').Protocol;
 
 var server = new MCPEServer.Server;
 
@@ -14,7 +14,7 @@ function arbitraryPrecondition(packet, rinfo) {
   return packet.fields.pingID > 0;
 }
 
-server.addPacketHandler(Protocol['default'].CONNECTED_PING, arbitraryPrecondition, function (packet, rinfo, next) {
+server.addPacketHandler(Protocol.CONNECTED_PING, arbitraryPrecondition, function (packet, rinfo, next) {
   
   var reply = Packet['default'].create(Protocol['default'].UNCONNECTED_PONG, {
     pingID: packet.fields.pingID,
