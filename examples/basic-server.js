@@ -1,4 +1,4 @@
-var MCPEServer = require('../lib/Server';
+var MCPEServer = require('../lib/Server');
 
 var Packet = require('../lib/net/Packet');
 
