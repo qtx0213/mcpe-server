@@ -1,33 +1,22 @@
-'use strict';
+var MCPEServer = require('../index');
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+var Packet = require('../lib/net/Packet');
 
-var _index = require('../index');
+var Protocol = require('../lib/net/Protocol');
 
-var _libNetPacket = require('../lib/net/Packet');
-
-var _libNetPacket2 = _interopRequireDefault(_libNetPacket);
-
-var _libNetProtocol = require('../lib/net/Protocol');
-
-var _libNetProtocol2 = _interopRequireDefault(_libNetProtocol);
-
-var server = new _index.Server();
+var server = new MCPEServer.Server();
 
 server.on('listen', function () {
   console.log('Listening on ' + server.localAddress + ':' + server.localPort);
 });
 
-// An example of a precondition for validating packets before processing them.
-// Preconditions are completely optional and run prior to the handler function.
-//
-// This one should always return true.
 function arbitraryPrecondition(packet, rinfo) {
   return packet.fields.pingID > 0;
 }
 
-server.addPacketHandler(_libNetProtocol2['default'].CONNECTED_PING, arbitraryPrecondition, function (packet, rinfo, next) {
-  var reply = _libNetPacket2['default'].create(_libNetProtocol2['default'].UNCONNECTED_PONG, {
+server.addPacketHandler(Protocol['default'].CONNECTED_PING, arbitraryPrecondition, function (packet, rinfo, next) {
+  
+  var reply = Packet['default'].create(Protocol['default'].UNCONNECTED_PONG, {
     pingID: packet.fields.pingID,
     serverID: 0,
     magic: null,
