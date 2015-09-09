@@ -2,8 +2,6 @@ mcpe-server
 ===========
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Github issues](https://img.shields.io/github/issues/mhsjlw/mcpe-server.svg)]
-(https://img.shields.io/github/issues/mhsjlw/flying-squid.svg)
 [![Gratipay](https://img.shields.io/gratipay/mhsjlw.svg)]
 (https://gratipay.com/~mhsjlw/)
 
