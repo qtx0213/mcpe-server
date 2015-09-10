@@ -4,6 +4,10 @@ var Protocol = require('./lib/net/protocol').Protocol;
 
 var server = new MCPEServer;
 
+config={
+  serverName: "A MCPE Server"
+}
+
 server.on('listen', function () {
   console.log('Listening on ' + server.localAddress + ':' + server.localPort);
 });
@@ -18,7 +22,7 @@ server.addPacketHandler(Protocol.CONNECTED_PING, arbitraryPrecondition, function
     pingID: packet.fields.pingID,
     serverID: 0,
     magic: null,
-    identifier: 'MCPE;A Minecraft PE Server;2 7;0.11.1;0;20'
+    identifier: `MCPE;${config.serverName};2 7;0.11.1;0;20`
   });
 
   server.sendMessageTo(reply, rinfo);
