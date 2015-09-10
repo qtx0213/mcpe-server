@@ -1,5 +1,6 @@
 {
   "name": "A Minecraft PE Server",
   "port": 19132,
-  "maxPlayers": 10
+  "maxPlayers": 10,
+  "version": "Baby squid"
 }

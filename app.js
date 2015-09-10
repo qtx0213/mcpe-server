@@ -11,9 +11,9 @@ var MAGIC_VALUE = [0x00, 0xff, 0xff, 0x00, 0xfe, 0xfe, 0xfe, 0xfe, 0xfd, 0xfd, 0
 var config={
   serverName: settings.name,
   maxPlayers: settings.maxPlayers,
-  currentPlayers: 5, //TODO: real value
-  minecraftVersion: "0.12.1",
-  protocolVersion: "2 7"
+  currentPlayers: 10, //TODO: real value
+  minecraftVersion: settings.version,
+  protocolVersion: "7"
 };
 
 server.on('listen', function () {
@@ -40,6 +40,7 @@ server.addPacketHandler(Protocol.CONNECTED_PING, arbitraryPrecondition, function
 
 server.addPacketHandler(Protocol.OPEN_CONNECTION_REQUEST, arbitraryPrecondition, function (packet, rinfo, next) {
   console.log("OPEN_CONNECTION_REQUEST");
+  console.log(packet.fields.protocolVersion);
   var reply = Packet.create(Protocol.OPEN_CONNECTION_REPLY, {
     magic: null,
     serverID: 0,
@@ -70,23 +71,13 @@ server.addPacketHandler(Protocol.OPEN_CONNECTION_REQUEST_2, arbitraryPreconditio
 
 server.addPacketHandler(Protocol.CLIENT_CONNECT, arbitraryPrecondition, function (packet, rinfo, next) {
   console.log("CLIENT_CONNECT");
-  console.log("Client joined, sessid: "+packet.fields.sessionID);
-  
-  //That will not work, but mayble)
-  connect(packet,rinfo);
-  
+
   next();
 });
 
 server.addPacketHandler(Protocol.CLIENT_HANDSHAKE, arbitraryPrecondition, function (packet, rinfo, next) {
   console.log("CLIENT_HANDSHAKE");
   
-  next();
-});
-
-server.addPacketHandler(Protocol.CLIENT_READY, arbitraryPrecondition, function (packet, rinfo, next) {
-  console.log("CLIENT_READY");
-
   next();
 });
 
@@ -102,23 +93,105 @@ server.addPacketHandler(Protocol.ACK, arbitraryPrecondition, function (packet, r
   next();
 });
 
-function connect(packet,rinfo){
-  var reply = Packet.create(Protocol.START_GAME, {
-    seed: 0,
-    generator: 0,
-    gamemode: 1,
-    eid: 1,
-    spawnx: 0,
-    spawny: 200,
-    spawnz: 0,
-    x: 0,
-    y: 200,
-    z: 0
-  });
+server.addPacketHandler(Protocol.CUST_0, arbitraryPrecondition, function (packet, rinfo, next) {
+  console.log("CUST");
+  recvCust("0",packet);
+  next();
+});
 
-  server.sendMessageTo(reply, rinfo);
+server.addPacketHandler(Protocol.CUST_1, arbitraryPrecondition, function (packet, rinfo, next) {
+  console.log("CUST");
+  recvCust("1",packet);
+  next();
+});
+
+server.addPacketHandler(Protocol.CUST_2, arbitraryPrecondition, function (packet, rinfo, next) {
+  console.log("CUST");
+  recvCust("2",packet);
+  next();
+});
+
+server.addPacketHandler(Protocol.CUST_3, arbitraryPrecondition, function (packet, rinfo, next) {
+  console.log("CUST");
+  recvCust("3",packet);
+  next();
+});
+
+server.addPacketHandler(Protocol.CUST_4, arbitraryPrecondition, function (packet, rinfo, next) {
+  console.log("CUST");
+  recvCust("4",packet);
+  next();
+});
+
+server.addPacketHandler(Protocol.CUST_5, arbitraryPrecondition, function (packet, rinfo, next) {
+  console.log("CUST");
+  recvCust("5",packet);
+  next();
+});
+
+server.addPacketHandler(Protocol.CUST_6, arbitraryPrecondition, function (packet, rinfo, next) {
+  console.log("CUST");
+  recvCust("6",packet);
+  next();
+});
+
+server.addPacketHandler(Protocol.CUST_7, arbitraryPrecondition, function (packet, rinfo, next) {
+  console.log("CUST");
+  recvCust("7",packet);
+  next();
+});
+
+server.addPacketHandler(Protocol.CUST_8, arbitraryPrecondition, function (packet, rinfo, next) {
+  console.log("CUST");
+  recvCust("8",packet);
+  next();
+});
+
+server.addPacketHandler(Protocol.CUST_9, arbitraryPrecondition, function (packet, rinfo, next) {
+  console.log("CUST");
+  recvCust("9",packet);
+  next();
+});
+
+server.addPacketHandler(Protocol.CUST_A, arbitraryPrecondition, function (packet, rinfo, next) {
+  console.log("CUST");
+  recvCust("A",packet);
+  next();
+});
+
+server.addPacketHandler(Protocol.CUST_B, arbitraryPrecondition, function (packet, rinfo, next) {
+  console.log("CUST");
+  recvCust("B",packet);
+  next();
+});
+
+server.addPacketHandler(Protocol.CUST_C, arbitraryPrecondition, function (packet, rinfo, next) {
+  console.log("CUST");
+  recvCust("C",packet);
+  next();
+});
+
+server.addPacketHandler(Protocol.CUST_D, arbitraryPrecondition, function (packet, rinfo, next) {
+  console.log("CUST");
+  recvCust("D",packet);
+  next();
+});
+
+server.addPacketHandler(Protocol.CUST_E, arbitraryPrecondition, function (packet, rinfo, next) {
+  console.log("CUST");
+  recvCust("E",packet);
+  next();
+});
+
+server.addPacketHandler(Protocol.CUST_F, arbitraryPrecondition, function (packet, rinfo, next) {
+  console.log("CUST");
+  recvCust("F",packet);
+  next();
+});
+
+
+function recvCust(cust,packet){
+  console.log("CUSTDECODE: "+cust);
+  console.log(packet);
 }
-
-
-
 server.listen();
