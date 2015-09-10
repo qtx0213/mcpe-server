@@ -69,45 +69,55 @@ server.addPacketHandler(Protocol.OPEN_CONNECTION_REQUEST_2, arbitraryPreconditio
 
 server.addPacketHandler(Protocol.CLIENT_CONNECT, arbitraryPrecondition, function (packet, rinfo, next) {
   console.log("CLIENT_CONNECT");
-  console.log(packet.fields.sessionID);
+  console.log("Client joined, sessid: "+packet.fields.sessionID);
   
-  var reply = Packet.create(Protocol.SERVER_HANDSHAKE, {
-    clientAddress: [0,0,0,0],
-    clientPort: 0,
-    unknown: 0,
-    address1: [0,0,0,0],
-    port1: 0,
-    address2: [0,0,0,0],
-    port2: 0,
-    address3: [0,0,0,0],
-    port3: 0,
-    address4: [0,0,0,0],
-    port4: 0,
-    address5: [0,0,0,0],
-    port5: 0,
-    address6: [0,0,0,0],
-    port6: 0,
-    address7: [0,0,0,0],
-    port7: 0,
-    address8: [0,0,0,0],
-    port8: 0,
-    address9: [0,0,0,0],
-    port9: 0,
-    address10: [0,0,0,0],
-    port10: 0,
-    ping: packet.fields.sessionID,
-    pong: packet.fields.sessionID
-  });
-
-  server.sendMessageTo(reply, rinfo);
+  //That will not work, but mayble)
+  connect(packet,rinfo);
   
   next();
 });
 
 server.addPacketHandler(Protocol.CLIENT_HANDSHAKE, arbitraryPrecondition, function (packet, rinfo, next) {
   console.log("CLIENT_HANDSHAKE");
+  
+  next();
+});
+
+server.addPacketHandler(Protocol.CLIENT_READY, arbitraryPrecondition, function (packet, rinfo, next) {
+  console.log("CLIENT_READY");
 
   next();
 });
+
+server.addPacketHandler(Protocol.PING, arbitraryPrecondition, function (packet, rinfo, next) {
+  console.log("PING");
+
+  next();
+});
+
+server.addPacketHandler(Protocol.ACK, arbitraryPrecondition, function (packet, rinfo, next) {
+  console.log("ACK");
+
+  next();
+});
+
+function connect(packet,rinfo){
+  var reply = Packet.create(Protocol.START_GAME, {
+    seed: 0,
+    generator: 0,
+    gamemode: 1,
+    eid: 1,
+    spawnx: 0,
+    spawny: 200,
+    spawnz: 0,
+    x: 0,
+    y: 200,
+    z: 0
+  });
+
+  server.sendMessageTo(reply, rinfo);
+}
+
+
 
 server.listen();
