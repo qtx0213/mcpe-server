@@ -6,9 +6,13 @@ var server = new MCPEServer;
 
 var MAGIC_VALUE = [0x00, 0xff, 0xff, 0x00, 0xfe, 0xfe, 0xfe, 0xfe, 0xfd, 0xfd, 0xfd, 0xfd, 0x12, 0x34, 0x56, 0x78];
 
-config={
-  serverName: "A MCPE Server"
-}
+var config={
+  serverName: "A MCPE Server",
+  maxPlayers: 10,
+  currentPlayers: 5, //TODO: real value
+  minecraftVersion: "0.12.1",
+  protocolVersion: "2 7"
+};
 
 server.on('listen', function () {
   console.log('Listening on ' + server.localAddress + ':' + server.localPort);
@@ -24,7 +28,7 @@ server.addPacketHandler(Protocol.CONNECTED_PING, arbitraryPrecondition, function
     pingID: packet.fields.pingID,
     serverID: 0,
     magic: null,
-    identifier: `MCPE;${config.serverName};2 7;0.11.1;0;20`
+    identifier: "MCPE;"+config.serverName+";"+config.protocolVersion+";"+config.minecraftVersion+";"+config.currentPlayers+";"+config.maxPlayers
   });
 
   server.sendMessageTo(reply, rinfo);
@@ -32,11 +36,6 @@ server.addPacketHandler(Protocol.CONNECTED_PING, arbitraryPrecondition, function
   next();
 });
 
-server.addPacketHandler(Protocol.CLIENT_CONNECT, arbitraryPrecondition, function (packet, rinfo, next) {
-  console.log("CLIENT_CONNECT");
-
-  next();
-});
 server.addPacketHandler(Protocol.OPEN_CONNECTION_REQUEST, arbitraryPrecondition, function (packet, rinfo, next) {
   console.log("OPEN_CONNECTION_REQUEST");
   var reply = Packet.create(Protocol.OPEN_CONNECTION_REPLY, {
@@ -67,5 +66,10 @@ server.addPacketHandler(Protocol.OPEN_CONNECTION_REQUEST_2, arbitraryPreconditio
   next();
 });
 
+server.addPacketHandler(Protocol.CLIENT_CONNECT, arbitraryPrecondition, function (packet, rinfo, next) {
+  console.log("CLIENT_CONNECT");
+  
+  next();
+});
 
 server.listen();
