@@ -2,14 +2,15 @@ var MCPEServer = require('./lib/server').Server;
 var Packet = require('./lib/net/packet').Packet;
 var Protocol = require('./lib/net/protocol').Protocol;
 var DataTypes = require('./lib/net/datatypes');
+var settings = require('./config/settings');
 
 var server = new MCPEServer;
 
 var MAGIC_VALUE = [0x00, 0xff, 0xff, 0x00, 0xfe, 0xfe, 0xfe, 0xfe, 0xfd, 0xfd, 0xfd, 0xfd, 0x12, 0x34, 0x56, 0x78];
 
 var config={
-  serverName: "A MCPE Server",
-  maxPlayers: 10,
+  serverName: settings.name,
+  maxPlayers: settings.maxPlayers,
   currentPlayers: 5, //TODO: real value
   minecraftVersion: "0.12.1",
   protocolVersion: "2 7"
