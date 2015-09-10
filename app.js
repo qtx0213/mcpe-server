@@ -105,90 +105,17 @@ server.addPacketHandler(Protocol.CUST_1, arbitraryPrecondition, function (packet
   next();
 });
 
-server.addPacketHandler(Protocol.CUST_2, arbitraryPrecondition, function (packet, rinfo, next) {
-  console.log("CUST");
-  recvCust("2",packet);
-  next();
-});
-
-server.addPacketHandler(Protocol.CUST_3, arbitraryPrecondition, function (packet, rinfo, next) {
-  console.log("CUST");
-  recvCust("3",packet);
-  next();
-});
-
-server.addPacketHandler(Protocol.CUST_4, arbitraryPrecondition, function (packet, rinfo, next) {
-  console.log("CUST");
-  recvCust("4",packet);
-  next();
-});
-
-server.addPacketHandler(Protocol.CUST_5, arbitraryPrecondition, function (packet, rinfo, next) {
-  console.log("CUST");
-  recvCust("5",packet);
-  next();
-});
-
-server.addPacketHandler(Protocol.CUST_6, arbitraryPrecondition, function (packet, rinfo, next) {
-  console.log("CUST");
-  recvCust("6",packet);
-  next();
-});
-
-server.addPacketHandler(Protocol.CUST_7, arbitraryPrecondition, function (packet, rinfo, next) {
-  console.log("CUST");
-  recvCust("7",packet);
-  next();
-});
-
-server.addPacketHandler(Protocol.CUST_8, arbitraryPrecondition, function (packet, rinfo, next) {
-  console.log("CUST");
-  recvCust("8",packet);
-  next();
-});
-
-server.addPacketHandler(Protocol.CUST_9, arbitraryPrecondition, function (packet, rinfo, next) {
-  console.log("CUST");
-  recvCust("9",packet);
-  next();
-});
-
-server.addPacketHandler(Protocol.CUST_A, arbitraryPrecondition, function (packet, rinfo, next) {
-  console.log("CUST");
-  recvCust("A",packet);
-  next();
-});
-
 server.addPacketHandler(Protocol.CUST_B, arbitraryPrecondition, function (packet, rinfo, next) {
   console.log("CUST");
   recvCust("B",packet);
   next();
 });
 
-server.addPacketHandler(Protocol.CUST_C, arbitraryPrecondition, function (packet, rinfo, next) {
-  console.log("CUST");
-  recvCust("C",packet);
+server.addPacketHandler(Protocol.CLIENT_READY, arbitraryPrecondition, function (packet, rinfo, next) {
+  console.log("CLIENT_READY");
+
   next();
 });
-
-server.addPacketHandler(Protocol.CUST_D, arbitraryPrecondition, function (packet, rinfo, next) {
-  console.log("CUST");
-  recvCust("D",packet);
-  next();
-});
-
-server.addPacketHandler(Protocol.CUST_E, arbitraryPrecondition, function (packet, rinfo, next) {
-  console.log("CUST");
-  recvCust("E",packet);
-  next();
-});
-
-server.addPacketHandler(Protocol.CUST_F, arbitraryPrecondition, function (packet, rinfo, next) {
-  console.log("CUST");
-  recvCust("F",packet);
-  next();
-});
-
 
 function recvCust(cust,packet){
   console.log("CUSTDECODE: "+cust);
